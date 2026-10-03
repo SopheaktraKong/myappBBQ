@@ -1,0 +1,135 @@
+{
+  "project_name": "QR Code Menu & Ordering System for BBQ Restaurant",
+  "theme": {
+    "strategy": "hybrid",
+    "customer_app": "light",
+    "kds_app": "dark",
+    "admin_waiter_app": "system (toggle)"
+  },
+  "typography": {
+    "fonts": {
+      "heading_latin": "Cabinet Grotesk",
+      "heading_khmer": "Noto Sans Khmer",
+      "body_latin": "Manrope",
+      "body_khmer": "Noto Sans Khmer",
+      "mono": "JetBrains Mono"
+    },
+    "rules": {
+      "h1": "text-4xl sm:text-5xl tracking-tight font-black",
+      "h2": "text-2xl sm:text-3xl tracking-tight font-bold",
+      "h3": "text-xl sm:text-2xl font-bold",
+      "body": "text-base leading-relaxed",
+      "overline": "uppercase text-xs tracking-[0.2em] font-bold"
+    },
+    "implementation": "Dynamically switch font-family on the document root or container based on active locale (en vs km). When 'km', prioritize Noto Sans Khmer for all text."
+  },
+  "colors": {
+    "primary": {
+      "DEFAULT": "#D9381E",
+      "hover": "#B92D17",
+      "foreground": "#FFFFFF",
+      "description": "Chili Red - Used for Primary CTAs, Add to Cart"
+    },
+    "accent": {
+      "DEFAULT": "#F2A900",
+      "foreground": "#000000",
+      "description": "Amber - Used for highlights, 'Popular' tags"
+    },
+    "background": {
+      "customer": "#FDFBF7",
+      "kds": "#0A0A0A",
+      "admin": "#F4F4F5"
+    },
+    "surface": {
+      "customer": "#FFFFFF",
+      "kds": "#1A1A1A",
+      "admin": "#FFFFFF"
+    },
+    "kds_status": {
+      "fresh": "#22C55E",
+      "warning": "#F59E0B",
+      "late": "#EF4444"
+    }
+  },
+  "visual_enhancers": {
+    "surfaces": {
+      "customer_sticky_cart": "backdrop-blur-xl bg-white/80 border-t border-black/5 shadow-[0_-8px_32px_rgba(0,0,0,0.08)]",
+      "kds_ticket": "bg-neutral-900 border border-neutral-800 rounded-lg shadow-sm"
+    },
+    "shadows": {
+      "soft": "shadow-[0_8px_30px_rgb(0,0,0,0.04)]",
+      "floating": "shadow-[0_20px_40px_rgb(0,0,0,0.08)]"
+    }
+  },
+  "layouts": {
+    "customer_menu": {
+      "description": "Mobile-first, single column for list view or 2-column grid for dense item view.",
+      "grid": "grid-cols-1 md:grid-cols-2 gap-4",
+      "spacing": "p-4 sm:p-6 pb-32 (to account for sticky cart at bottom)"
+    },
+    "kds": {
+      "description": "High-density, horizontal layout for tablets. Items flow left to right.",
+      "grid": "grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4",
+      "spacing": "p-4"
+    },
+    "waiter_map": {
+      "description": "Visual representation of tables using CSS grid or flex wrap, with status indicators (Free, Occupied, Needs Staff).",
+      "spacing": "p-6"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "rounded-full px-6 py-3 font-bold transition-transform hover:scale-[1.02] active:scale-[0.98]",
+      "action_fab": "rounded-full shadow-floating bg-white text-black border border-gray-200"
+    },
+    "cards": {
+      "menu_item": "flex flex-row overflow-hidden bg-white rounded-2xl shadow-soft border border-black/5",
+      "kds_ticket": "flex flex-col rounded-xl bg-neutral-900 border border-neutral-800 p-4"
+    }
+  },
+  "motion": {
+    "transitions": "transition-transform 0.2s ease, opacity 0.2s ease",
+    "interactions": "Scale down slightly on press (active:scale-95) for all interactive elements to provide tactile feedback.",
+    "cart_sheet": "Slide up from bottom (Framer Motion: y: 100% -> y: 0) for cart reveal."
+  },
+  "accessibility": {
+    "contrast": "Ensure 4.5:1 minimum for text. KDS must use text-white on deep gray/black.",
+    "touch_targets": "Minimum 48x48px for all mobile buttons (add to cart, navigation).",
+    "testing": "All interactive elements MUST include a data-testid attribute (e.g., data-testid='add-to-cart-btn')."
+  },
+  "media": {
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1720720581218-e20039f18828?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwxfHxjYW1ib2RpYW4lMjBiYnElMjBmb29kfGVufDB8fHx8MTc4NzgzOTk4NHww&ixlib=rb-4.1.0&q=85",
+        "category": "hero",
+        "description": "Man cooking fish on grill - use for landing or header background"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1652448258623-7f31e9768bdc?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwzfHxjYW1ib2RpYW4lMjBiYnElMjBmb29kfGVufDB8fHx8MTc4NzgzOTk4NHww&ixlib=rb-4.1.0&q=85",
+        "category": "menu_item",
+        "description": "Plate of food and soda - placeholder for actual menu items"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1556742393-d75f468bfcb0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzV8MHwxfHNlYXJjaHwyfHxyZXN0YXVyYW50JTIwd2FpdGVyJTIwcG9zJTIwdGFibGV0fGVufDB8fHx8MTc4NzgzOTk4NHww&ixlib=rb-4.1.0&q=85",
+        "category": "dashboard_auth",
+        "description": "Barista using tablet - good for staff login page background"
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Build the customer mobile view using Shadcn UI forms and pure HTML/Tailwind for layouts.",
+    "Ensure the locale toggle sets the font-family to Noto Sans Khmer when Khmer is active.",
+    "For the KDS (Kitchen Display), strictly adhere to the dark mode palette and high contrast requirements.",
+    "Use 'sonner' for toast notifications like 'Order Placed' or 'Staff Called'.",
+    "Implement 'Call Staff' and 'Ask for Bill' as prominent Action FABs (Floating Action Buttons) on the customer menu.",
+    "On Waiter view, ensure the table map provides immediate visual indication of tables needing assistance.",
+    "Build for .js and .jsx files as this is a JS project, avoid .tsx."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Do not use generic centered layouts. Prioritize left alignment for content.",
+    "Do not use transparent backgrounds for headers/sticky elements; always use backdrop-blur and a semi-transparent fill.",
+    "Do not apply `transition: all`. Target specific properties.",
+    "Include data-testid on all interactive elements.",
+    "Use pill-shaped or slightly rounded UI elements for the customer side, sharp edges for KDS."
+  ]
+}
