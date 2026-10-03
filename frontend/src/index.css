@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Khmer:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-customer: #FDFBF7;
+  --bg-kds: #0A0A0A;
+  --bg-admin: #F4F4F5;
+  --chili: #D9381E;
+  --chili-hover: #B92D17;
+  --amber: #F2A900;
+}
+
+html, body {
+  margin: 0;
+  font-family: 'Manrope', 'Noto Sans Khmer', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-customer);
+  color: #171717;
+}
+
+.font-khmer, [lang="km"] { font-family: 'Noto Sans Khmer', 'Manrope', system-ui, sans-serif !important; }
+.font-display { font-family: 'Manrope', 'Noto Sans Khmer', system-ui, sans-serif; letter-spacing: -0.02em; }
+.font-mono { font-family: 'JetBrains Mono', monospace; }
+
+@layer base {
+  :root {
+    --background: 40 40% 98%;
+    --foreground: 0 0% 9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
+    --primary: 8 78% 48%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 40 20% 94%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 40 20% 94%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 40 100% 47%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 30 15% 88%;
+    --input: 30 15% 88%;
+    --ring: 8 78% 48%;
+    --radius: 0.75rem;
+    --chart-1: 8 78% 48%;
+    --chart-2: 40 100% 47%;
+    --chart-3: 160 60% 40%;
+    --chart-4: 220 65% 55%;
+    --chart-5: 340 70% 55%;
+  }
+  .dark {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 8 78% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 64%;
+    --accent: 40 100% 52%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 63% 42%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 8 78% 55%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+}
+
+/* Subtle warm noise on customer bg */
+.bbq-bg {
+  background-color: #FDFBF7;
+  background-image:
+    radial-gradient(at 0% 0%, rgba(242, 169, 0, 0.06) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(217, 56, 30, 0.05) 0px, transparent 50%);
+}
+
+.kds-bg { background: #0A0A0A; color: #fafafa; }
+
+/* Sticky bottom cart shadow */
+.sticky-cart {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background-color: rgba(255,255,255,0.88);
+  box-shadow: 0 -12px 32px rgba(0,0,0,0.08);
+}
+
+.pill { border-radius: 9999px; }
+
+/* Hide scrollbars on category rail */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.tap { transition: transform 0.15s ease; }
+.tap:active { transform: scale(0.96); }
+
+/* KDS ticket age color */
+.ticket-fresh { border-left: 4px solid #22C55E; }
+.ticket-warn { border-left: 4px solid #F59E0B; }
+.ticket-late { border-left: 4px solid #EF4444; }
+
+@layer base {
+  [data-debug-wrapper="true"] {
+    display: contents !important;
+  }
+}
