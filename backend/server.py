@@ -399,20 +399,44 @@ async def delete_item(item_id: str, user=Depends(require_roles("owner"))):
     await ws_manager.broadcast({"type": "menu_updated"})
     return {"ok": True}
 
+UPLOAD_DIR = ROOT_DIR / "static" / "uploads"
+UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+
 @api.post("/upload/image")
 async def upload_image(file: UploadFile = File(...), user=Depends(require_roles("owner"))):
     ext = (file.filename or "img").rsplit(".", 1)[-1].lower()
     if ext not in ("jpg", "jpeg", "png", "webp", "gif"):
         ext = "png"
-    path = f"{APP_NAME}/menu/{uuid.uuid4()}.{ext}"
+    
+    filename = f"{uuid.uuid4()}.{ext}"
+    file_path = UPLOAD_DIR / filename
+    
     data = await file.read()
-    put_object(path, data, file.content_type or "image/png")
-    return {"path": path, "url": f"/api/files/{path}"}
+    with open(file_path, "wb") as f:
+        f.write(data)
+        
+    return {"url": f"/api/files/{filename}"}
 
 @api.get("/files/{path:path}")
 async def get_file(path: str):
-    data, ctype = get_object(path)
-    return Response(content=data, media_type=ctype)
+    filename = path.rsplit("/", 1)[-1]
+    file_path = UPLOAD_DIR / filename
+    if not file_path.exists():
+        raise HTTPException(404, "File not found")
+    
+    ext = filename.rsplit(".", 1)[-1].lower()
+    media_types = {
+        "png": "image/png",
+        "jpg": "image/jpeg",
+        "jpeg": "image/jpeg",
+        "webp": "image/webp",
+        "gif": "image/gif"
+    }
+    content_type = media_types.get(ext, "image/png")
+    
+    with open(file_path, "rb") as f:
+        content = f.read()
+    return Response(content=content, media_type=content_type)
 
 # ----------------------------- Tables -----------------------------
 @api.get("/tables")
