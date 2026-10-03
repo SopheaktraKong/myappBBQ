@@ -60,7 +60,7 @@ export default function AdminTables() {
   };
 
   const showQR = async (t) => {
-    const url = `${window.location.origin}/menu?table=${encodeURIComponent(t.label)}`;
+    const url = `${window.location.origin}/?table=${encodeURIComponent(t.label)}`;
     setQrData({ table: t, url });
     setQrOpen(true);
     setTimeout(async () => {
