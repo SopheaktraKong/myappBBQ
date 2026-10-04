@@ -36,7 +36,7 @@ export default function Landing() {
             Grill nights,<br/>zero waiting.
           </h1>
           <p className="mt-6 text-lg text-neutral-700 max-w-md">
-            Guests scan the table QR, browse the menu in Khmer or English, and pay by KHQR, ABA PayWay, or cash — while the kitchen sees every order instantly.
+            Guests scan the table QR, browse the menu in Khmer or English, and pay by ABA QR or cash, while the kitchen sees every order instantly.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             {isOwner && (
