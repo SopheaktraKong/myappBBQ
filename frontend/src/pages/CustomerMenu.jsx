@@ -53,14 +53,31 @@ export default function CustomerMenu() {
   }, []);
 
   useEffect(() => {
-    if (!session?.id) return;
+    (async () => {
+      const s = await api.get("/settings").then(r => r.data).catch(() => ({}));
+      setSettings({ accept_cash: s.accept_cash ?? true, accept_khqr: s.accept_khqr ?? true, accept_payway: s.accept_payway ?? true });
+      // Resolve table by label (customer QR includes label like "T-07")
+      const tRes = await api.get("/tables").catch(() => ({ data: [] }));
+      let match = tRes.data.find((x) => x.label === tableParam) || tRes.data.find((x) => x.id === tableParam);
+      if (!match && tableParam === "demo" && tRes.data[0]) match = tRes.data[0];
+      if (!match) {
+        toast.error(`Table "${tableParam}" not found — ask staff to open your table.`);
+        return;
+      }
+      setTable(match);
+      const sess = await api.post(`/sessions/open?table_id=${match.id}`).then((r) => r.data);
+      setSession(sess);
+      await loadMenu();
+      await loadBill(sess.id);
+    })();
+      if (!session?.id) return;
 
     const interval = setInterval(() => {
       loadBill(session.id);
-    }, 5000);
+    }, 3000);
 
     return () => clearInterval(interval);
-  }, [session?.id, loadBill]);
+  }, [tableParam, loadMenu, loadBill]);
 
   // WebSocket for live updates (menu availability + order status)
   useAppSocket((msg) => {
