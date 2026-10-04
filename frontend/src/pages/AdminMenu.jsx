@@ -163,10 +163,10 @@ export default function AdminMenu() {
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div><Label>Name (EN)</Label><Input data-testid="item-name-en" value={itemForm.name_en} onChange={(e) => setItemForm({ ...itemForm, name_en: e.target.value })} /></div>
-              <div><Label>Name (KM)</Label><Input data-testid="item-name-km" value={itemForm.name_km} onChange={(e) => setItemForm({ ...itemForm, name_km: e.target.value })} className="font-khmer" /></div>
+              <div><Label>Name (KH)</Label><Input data-testid="item-name-km" value={itemForm.name_km} onChange={(e) => setItemForm({ ...itemForm, name_km: e.target.value })} className="font-khmer" /></div>
             </div>
             <div><Label>Description (EN)</Label><Textarea value={itemForm.description_en} onChange={(e) => setItemForm({ ...itemForm, description_en: e.target.value })} /></div>
-            <div><Label>Description (KM)</Label><Textarea value={itemForm.description_km} onChange={(e) => setItemForm({ ...itemForm, description_km: e.target.value })} className="font-khmer" /></div>
+            <div><Label>Description (KH)</Label><Textarea value={itemForm.description_km} onChange={(e) => setItemForm({ ...itemForm, description_km: e.target.value })} className="font-khmer" /></div>
             <div className="grid grid-cols-2 gap-3">
               <div><Label>Price (USD)</Label><Input data-testid="item-price" type="number" step="0.01" value={itemForm.price} onChange={(e) => setItemForm({ ...itemForm, price: e.target.value })} /></div>
               <div>
