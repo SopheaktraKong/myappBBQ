@@ -74,11 +74,7 @@ export default function Landing() {
             alt="BBQ grill"
             className="rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.15)] object-cover w-full aspect-[4/5]"
           />
-          <div className="absolute -bottom-6 -left-2 sm:-left-6 bg-white rounded-2xl p-3 sm:p-4 shadow-[0_20px_40px_rgba(0,0,0,0.1)] max-w-[200px] sm:max-w-[220px]">
-            <div className="text-[10px] sm:text-xs uppercase font-bold tracking-widest text-neutral-500">Live order</div>
-            <div className="mt-1 font-display font-bold text-sm sm:text-base">Table 07 · 2 min ago</div>
-            <div className="text-xs sm:text-sm text-neutral-600 mt-1">Beef skewers ×3, Cola ×2</div>
-          </div>
+          
         </div>
       </section>
 
