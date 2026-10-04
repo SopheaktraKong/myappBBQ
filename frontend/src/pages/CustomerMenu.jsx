@@ -64,11 +64,7 @@ export default function CustomerMenu() {
         toast.error(`Table "${tableParam}" not found — ask staff to open your table.`);
         return;
       }
-      if (!session?.id) return;
-
-      const interval = setInterval(() => {
-      loadBill(session.id);
-      }, 3000);
+      
       setTable(match);
       const sess = await api.post(`/sessions/open?table_id=${match.id}`).then((r) => r.data);
       setSession(sess);
