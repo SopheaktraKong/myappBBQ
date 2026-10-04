@@ -27,7 +27,15 @@ export default function WaiterView() {
     setTables(data);
   }, []);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => {
+  load(); // Fetch immediately on load
+
+  const interval = setInterval(() => {
+    load(); // Auto-refresh every 3 seconds
+  }, 3000);
+
+  return () => clearInterval(interval); // Clean up timer
+}, [load]);
   useAppSocket((msg) => {
     if (["new_order","order_updated","call_staff","ask_bill","session_opened","session_closed","payment_created"].includes(msg.type)) load();
     if (msg.type === "call_staff") toast.info(`Call staff · ${msg.session?.table_label}`);
