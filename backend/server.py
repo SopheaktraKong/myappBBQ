@@ -21,6 +21,15 @@ import json
 import asyncio
 import logging
 import requests
+import os
+import cloudinary
+import cloudinary.uploader
+
+cloudinary.config(
+    cloud_name=os.environ.get('oizbysro'),
+    api_key=os.environ.get('699364372979658'),
+    api_secret=os.environ.get('QPxCR6Uiw66R1vNqJv7nod8WEGA')
+)
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -404,18 +413,10 @@ UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 @api.post("/upload/image")
 async def upload_image(file: UploadFile = File(...), user=Depends(require_roles("owner"))):
-    ext = (file.filename or "img").rsplit(".", 1)[-1].lower()
-    if ext not in ("jpg", "jpeg", "png", "webp", "gif"):
-        ext = "png"
-    
-    filename = f"{uuid.uuid4()}.{ext}"
-    file_path = UPLOAD_DIR / filename
-    
     data = await file.read()
-    with open(file_path, "wb") as f:
-        f.write(data)
-        
-    return {"url": f"/api/files/{filename}"}
+    upload_result = cloudinary.uploader.upload(data)
+    image_url = upload_result.get("secure_url")
+    return {"url": image_url}
 
 @api.get("/files/{path:path}")
 async def get_file(path: str):
