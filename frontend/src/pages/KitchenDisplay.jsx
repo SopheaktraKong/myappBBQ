@@ -27,7 +27,15 @@ export default function KitchenDisplay() {
     setOrders(data);
   }, []);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => {
+  load(); // Initial load when page opens
+
+  const interval = setInterval(() => {
+    load(); // Auto-refresh every 3 seconds
+  }, 3000);
+
+  return () => clearInterval(interval); // Clean up timer on exit
+}, [load]);
   useEffect(() => {
     const t = setInterval(() => tick((n) => n + 1), 30000);
     return () => clearInterval(t);
